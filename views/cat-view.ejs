@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Categories</title>
+</head>
+<style>
+    table,
+    tr,
+    th
+    {
+        border-collapse: collapse;
+        border: 1px solid;
+    }
+    
+</style>
+<body>
+    <h1>All Categories</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let cat of categories) { %>
+                <tr id="<%= cat.CategoryId %>">
+                    <td><%= cat.Name %></td>
+                    <td><%= cat.Description %></td>
+                    
+                    <td><button onclick="window.location.href = 'update?id=<%= cat.CategoryId %>'">Edit</button></td>
+                    <% const found = products.some(e => e.Categorey === cat.Name );
+                    if(!found){ %>
+                    <td><button onclick="window.location.href = 'delete?id=<%= cat.CategoryId %>'">Delete</button></td>
+                    <% } else { %>
+                    <td>In use</td>
+                    <% }%>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+    <div>
+        
+        <button onclick="window.location.href = './create'" >Create Category</button>
+        <button onclick="window.location.href = '../products/all'" >All Products</button>
+        <button onclick="window.location.href = '../products/create'" >Create Product</button>
+    </div>
+</body>
+</html>

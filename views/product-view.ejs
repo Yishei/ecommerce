@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <style>
+        table,
+        tr,
+        th
+        {
+            border-collapse: collapse;
+            border: 1px solid;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>All Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i of data) { %>
+                <tr id="<%= i.ProductId %>">
+                    <td><%= i.ProductName %></td>
+                    <td><%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(i.Price) %></td>
+                    <td><%= i.Description %></td>
+                    <td><img src="/<%=i.Image%>" width="100px" height="75px"></td>
+                    <td><%= i.Categorey %></td>
+                    <td><button onclick="window.location.href = 'update?id=<%= i.ProductId %>'">Edit</button></td>
+                    <td><button onclick="window.location.href = 'delete?id=<%= i.ProductId %>'">Delete</button></td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+    <div>
+        <button onclick="window.location.href = './create'" >Create Product</button>
+        <button onclick="window.location.href = '../categories/create'" >Create Category</button>
+        <button onclick="window.location.href = '../categories/all'" >All Category</button>
+    </div>
+
+    
+
+</body>
+</html>

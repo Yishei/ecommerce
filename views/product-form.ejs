@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+</head>
+<body>
+    <h1>Product Form</h1>
+    <form method="post"> 
+        <% if(locals.product) {%>
+            <input type="number" name="ProductId" value="<%= product.ProductId %>" hidden>
+            <% } %>
+        <div>
+            <input type="text" name="ProductName" placeholder="Name" <% if (locals.product) { %>
+                value="<%= product.ProductName %>" 
+                <% } %> required/>
+        </div>
+        <div>
+            <input name="Price" type="number" placeholder="Price" <% if (locals.product) { %>
+                value="<%= product.Price %>" 
+                <% } %> step="0.01" required/>
+        </div>
+        <div>
+            <% if (locals.product) {  %>
+            <textarea name="Description" id="Description" rows="4" placeholder="Description"><%= product.Description %></textarea>
+            <% } else { %>
+                <textarea name="Description" id="Description" rows="4" placeholder="Description" required></textarea>
+            <% } %>
+        </div>
+        <div>
+            <select name="CategoryId" required>
+                <option value="">Select Category</option>
+                <% for(let cat of categories) { 
+                    if (locals.product && cat.CategoryId === product.CategoryId ) { %>
+                    <option value="<%= cat.CategoryId %>" selected><%= cat.Name %></option>
+                    <% } else { %>
+                    <option value="<%= cat.CategoryId %>"><%= cat.Name %></option>
+                    <% }%>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <input name="Image" type="file" />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <button onclick="window.location.href = './all'" >Cancel</button>
+</body>
+</html>

@@ -36,7 +36,9 @@
                     <td><button onclick="window.location.href = 'update?id=<%= cat.CategoryId %>'">Edit</button></td>
                     <% const found = products.some(e => e.Categorey === cat.Name );
                     if(!found){ %>
-                    <td><button onclick="window.location.href = 'delete?id=<%= cat.CategoryId %>'">Delete</button></td>
+                    <td><button onclick="setTimeout(() => {
+                        window.location.href = 'delete?id=<%= cat.CategoryId %>'
+                    }, 10000);">Delete</button></td>
                     <% } else { %>
                     <td>In use</td>
                     <% }%>
